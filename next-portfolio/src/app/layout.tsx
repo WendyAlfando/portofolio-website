@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import { TranslationProvider } from "@/context/TranslationContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
           <TranslationProvider>
             <Navbar />
             <main className="flex-grow">{children}</main>
+            <ScrollToTop />
           </TranslationProvider>
         </Providers>
         <Analytics />
