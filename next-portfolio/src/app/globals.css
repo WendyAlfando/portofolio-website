@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #fcd34d;
+  --color-secondary-dark: #f59e0b;
+
+  --color-light-bg: #f8fafc;
+  --color-light-text: #1e293b;
+  --color-light-gray: #f1f5f9;
+
+  --color-dark-bg: #0f172a;
+  --color-dark-text: #f8fafc;
+  --color-dark-surface: #1e293b;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-light-bg);
+    --foreground: var(--color-light-text);
+    --surface: #ffffff;
+    --border: rgba(15, 23, 42, 0.1);
+  }
+
+  /* Note: Next-Themes will toggle this class */
+  .dark {
+    --background: var(--color-dark-bg);
+    --foreground: var(--color-dark-text);
+    --surface: var(--color-dark-surface);
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply transition-colors duration-300;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 6px;
+  }
+}
+
+/* Base utility for hiding the default cursor later */
+.custom-cursor-active {
+  cursor: none !important;
+}
+
+.custom-cursor-active a,
+.custom-cursor-active button,
+.custom-cursor-active [role="button"] {
+  cursor: none !important;
+}
