@@ -47,7 +47,7 @@ export default function Hero() {
                         className="text-5xl md:text-6xl lg:text-7xl font-bold font-playfair leading-tight text-slate-900 dark:text-white"
                     >
                         <span className="block">Wendy Alfando</span>
-                        <span className="block text-3xl md:text-4xl lg:text-5xl mt-2 bg-gradient-to-r from-blue-600 dark:from-blue-400 to-yellow-500 bg-clip-text text-transparent">
+                        <span className="block text-3xl md:text-4xl lg:text-5xl mt-2 pb-2 leading-relaxed bg-gradient-to-r from-blue-600 dark:from-blue-400 to-yellow-500 bg-clip-text text-transparent">
                             {t('hero-title')}
                         </span>
                     </motion.h1>
