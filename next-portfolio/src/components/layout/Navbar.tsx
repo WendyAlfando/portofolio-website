@@ -29,7 +29,7 @@ export default function Navbar() {
         { name: t("nav-experience"), href: "#experience" },
         { name: t("nav-projects"), href: "#projects" },
         { name: t("nav-skills"), href: "#skills" },
-        { name: t("nav-testimonials"), href: "#testimonials" },
+        // { name: t("nav-testimonials"), href: "#testimonials" },
         { name: t("nav-contact"), href: "#contact" },
     ];
 

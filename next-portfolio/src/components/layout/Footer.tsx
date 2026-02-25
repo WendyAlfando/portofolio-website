@@ -64,7 +64,7 @@ export default function Footer() {
                         </h4>
                         <ul className="space-y-4">
                             <li><a href="#skills" className="hover:text-blue-400 transition-colors">{t('nav-skills')}</a></li>
-                            <li><a href="#testimonials" className="hover:text-blue-400 transition-colors">{t('nav-testimonials')}</a></li>
+                            {/* <li><a href="#testimonials" className="hover:text-blue-400 transition-colors">{t('nav-testimonials')}</a></li> */}
                             <li><a href="#contact" className="hover:text-blue-400 transition-colors">{t('nav-contact')}</a></li>
                         </ul>
                     </div>
