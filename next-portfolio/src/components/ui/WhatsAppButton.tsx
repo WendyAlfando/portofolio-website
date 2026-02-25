@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
     const [isVisible, setIsVisible] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const phoneNumber = "6281234567890"; // Replace with actual number
+    const phoneNumber = "6287771365529";
     const message = encodeURIComponent("Halo Wendy, saya tertarik untuk berdiskusi mengenai...");
 
     useEffect(() => {
