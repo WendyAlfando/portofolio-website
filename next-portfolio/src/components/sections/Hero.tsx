@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { useTranslation } from "@/context/TranslationContext"
 import ParticleBackground from "@/components/ui/ParticleBackground"
+import TypingEffect from "@/components/ui/TypingEffect"
 import { ArrowRight, Download, Briefcase } from "lucide-react"
 
 export default function Hero() {
@@ -38,6 +39,17 @@ export default function Hero() {
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
                         {t('hero-subtitle')}
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.35, duration: 0.4 }}
+                        className="text-sm text-blue-500 dark:text-blue-400 font-medium h-6"
+                    >
+                        <TypingEffect
+                            words={[t('typing-word1'), t('typing-word2'), t('typing-word3'), t('typing-word4')]}
+                        />
                     </motion.div>
 
                     <motion.h1

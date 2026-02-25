@@ -152,7 +152,21 @@ export const translations = {
         'project6-result-label': 'Hasil:',
         'project6-result': 'Detailed process documentation untuk 10+ business processes, enabling successful automation dan process improvement initiatives.',
         'project6-metric1': 'Processes Mapped',
-        'project6-metric2': 'Documentation'
+        'project6-metric2': 'Documentation',
+
+        'edu-title': 'Pendidikan',
+        'edu-subtitle': 'Fondasi akademis yang kuat untuk karir profesional',
+        'edu-degree': 'S1 Information Systems',
+        'edu-description': 'Menyelesaikan pendidikan S1 dengan predikat Summa Cum Laude di jurusan Information Systems, Bina Nusantara University. Fokus pada pengembangan kemampuan analisis bisnis, pemrograman, dan manajemen data.',
+        'edu-achievements-title': 'Pencapaian Utama',
+        'edu-achievement1': 'Lulus dengan predikat Summa Cum Laude (GPA 3.91/4.00)',
+        'edu-achievement2': 'Aktif dalam berbagai organisasi kampus dan kegiatan mentoring',
+        'edu-achievement3': 'Mengembangkan kemampuan analisis bisnis dan data processing melalui berbagai proyek akademik',
+
+        'typing-word1': 'Business Analyst',
+        'typing-word2': 'RPA Specialist',
+        'typing-word3': 'QA Tester',
+        'typing-word4': 'Problem Solver'
     },
     en: {
         'nav-about': 'About',
@@ -307,6 +321,20 @@ export const translations = {
         'project6-result-label': 'Results:',
         'project6-result': 'Detailed process documentation for 10+ business processes, enabling successful automation and process improvement initiatives.',
         'project6-metric1': 'Processes Mapped',
-        'project6-metric2': 'Documentation'
+        'project6-metric2': 'Documentation',
+
+        'edu-title': 'Education',
+        'edu-subtitle': 'Strong academic foundation for a professional career',
+        'edu-degree': 'Bachelor of Information Systems',
+        'edu-description': 'Completed undergraduate studies with Summa Cum Laude honors in Information Systems at Bina Nusantara University. Focused on developing business analysis, programming, and data management skills.',
+        'edu-achievements-title': 'Key Achievements',
+        'edu-achievement1': 'Graduated Summa Cum Laude (GPA 3.91/4.00)',
+        'edu-achievement2': 'Active in various campus organizations and mentoring activities',
+        'edu-achievement3': 'Developed strong business analysis and data processing skills through various academic projects',
+
+        'typing-word1': 'Business Analyst',
+        'typing-word2': 'RPA Specialist',
+        'typing-word3': 'QA Tester',
+        'typing-word4': 'Problem Solver'
     }
 };
