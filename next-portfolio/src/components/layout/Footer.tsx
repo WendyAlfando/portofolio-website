@@ -73,7 +73,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-slate-800 text-sm text-slate-400">
-                    <p>{t('footer-copyright')}</p>
+                    <p>&copy; {new Date().getFullYear()} Wendy Alfando Portfolio. {t('footer-rights')}</p>
                     <p className="mt-4 md:mt-0">
                         {t('footer-made-with')} 🚀
                     </p>
