@@ -99,36 +99,44 @@ export default function Hero() {
                     </motion.div>
                 </motion.div>
 
-                {/* Right Side: Image with 3D Float */}
+                {/* Right Side: Image blending into background */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
                     className="relative lg:ml-auto flex justify-center lg:justify-end"
                 >
                     <motion.div
                         animate={{
-                            y: [0, -20, 0],
-                            rotateZ: [0, 2, 0, -2, 0]
+                            y: [0, -15, 0],
                         }}
                         transition={{
-                            duration: 6,
+                            duration: 5,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
-                        className="relative w-72 h-72 md:w-96 md:h-96 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/20 dark:border-slate-800/50 backdrop-blur-sm group"
+                        className="relative w-[22rem] h-[22rem] md:w-[30rem] md:h-[30rem] group"
                     >
-                        {/* We assume the original profile image is in public/images/Profile.png */}
-                        <Image
-                            src="/images/Profile.png"
-                            alt="Wendy Alfando"
-                            fill
-                            priority
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                        />
-                        {/* Overlay Gradient for better blending */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Glow behind the photo */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-yellow-500/10 rounded-full blur-3xl scale-110" />
+
+                        {/* Profile image — no border, edges fade to transparent */}
+                        <div
+                            className="relative w-full h-full"
+                            style={{
+                                WebkitMaskImage: "radial-gradient(ellipse 75% 80% at 50% 45%, black 40%, transparent 100%)",
+                                maskImage: "radial-gradient(ellipse 75% 80% at 50% 45%, black 40%, transparent 100%)",
+                            }}
+                        >
+                            <Image
+                                src="/images/Profile.png"
+                                alt="Wendy Alfando"
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 352px, 480px"
+                                className="object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                            />
+                        </div>
                     </motion.div>
                 </motion.div>
             </div>
