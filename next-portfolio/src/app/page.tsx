@@ -1,14 +1,17 @@
+import dynamic from "next/dynamic"
 import Hero from "@/components/sections/Hero"
-import About from "@/components/sections/About"
-import Education from "@/components/sections/Education"
-import Experience from "@/components/sections/Experience"
-import Projects from "@/components/sections/Projects"
-import Skills from "@/components/sections/Skills"
-// import Testimonials from "@/components/sections/Testimonials"
-import Organization from "@/components/sections/Organization"
-import Contact from "@/components/sections/Contact"
-import Footer from "@/components/layout/Footer"
 import CustomCursor from "@/components/ui/CustomCursor"
+
+// Lazy load below-fold sections for better initial page load
+const About = dynamic(() => import("@/components/sections/About"))
+const Education = dynamic(() => import("@/components/sections/Education"))
+const Experience = dynamic(() => import("@/components/sections/Experience"))
+const Projects = dynamic(() => import("@/components/sections/Projects"))
+const Skills = dynamic(() => import("@/components/sections/Skills"))
+// const Testimonials = dynamic(() => import("@/components/sections/Testimonials"))
+const Organization = dynamic(() => import("@/components/sections/Organization"))
+const Contact = dynamic(() => import("@/components/sections/Contact"))
+const Footer = dynamic(() => import("@/components/layout/Footer"))
 
 export default function Home() {
   return (

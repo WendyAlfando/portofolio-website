@@ -66,6 +66,7 @@ export default function Navbar() {
                             {mounted && (
                                 <button
                                     onClick={toggleLang}
+                                    aria-label={currentLang === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
                                     className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all font-bold text-sm ${scrolled
                                         ? "bg-white/10 hover:bg-white/20 text-white"
                                         : "bg-slate-100/80 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-800 dark:text-white"
@@ -79,6 +80,7 @@ export default function Navbar() {
                             {mounted && (
                                 <button
                                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                    aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                                     className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${scrolled
                                         ? "bg-white/10 hover:bg-white/20 text-yellow-400"
                                         : "bg-slate-100/80 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-blue-500 dark:text-yellow-400"
@@ -94,6 +96,8 @@ export default function Navbar() {
                     <button
                         className={`md:hidden p-2 ${scrolled ? "text-white" : "text-slate-900 dark:text-white"}`}
                         onClick={() => setIsOpen(!isOpen)}
+                        aria-label={isOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={isOpen}
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>

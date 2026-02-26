@@ -88,10 +88,11 @@ export default function Skills() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
-                            className="bg-slate-50 dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-shadow"
+                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                            className="bg-slate-50 dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5 hover:border-blue-200 dark:hover:border-blue-500/30 transition-all duration-300 group/card"
                         >
                             <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
-                                <span className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-2xl">
+                                <span className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-2xl group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-300">
                                     {category.icon}
                                 </span>
                                 {category.title}
