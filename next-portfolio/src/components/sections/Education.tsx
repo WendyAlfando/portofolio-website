@@ -1,150 +1,86 @@
-"use client";
+import { Award, ExternalLink, GraduationCap } from "lucide-react"
+import SectionHeading from "@/components/ui/SectionHeading"
+import { certifications } from "@/content/profile"
+import type { Dictionary } from "@/content/types"
+import { formatMonthYear, type Locale } from "@/lib/i18n"
 
-import { motion } from "framer-motion";
-import { GraduationCap, Award, Calendar, MapPin } from "lucide-react";
-import { useTranslation } from "@/context/TranslationContext";
-
-export default function Education() {
-    const { t } = useTranslation();
-
-    const education = [
-        {
-            degree: t('edu-degree'),
-            school: "Bina Nusantara University (BINUS)",
-            period: "2021 - 2025",
-            location: "Jakarta, Indonesia",
-            gpa: "3.91 / 4.00",
-            honor: "Summa Cum Laude",
-            description: t('edu-description'),
-            achievements: [
-                t('edu-achievement1'),
-                t('edu-achievement2'),
-                t('edu-achievement3'),
-            ]
-        }
-    ];
+export default function Education({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+    const { education } = dict
 
     return (
-        <section id="education" className="py-20 bg-slate-50 dark:bg-slate-900/50">
-            <div className="max-w-6xl mx-auto px-6">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold font-playfair text-slate-900 dark:text-white">
-                        {t('edu-title')}
-                    </h2>
-                    <p className="mt-4 text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
-                        {t('edu-subtitle')}
-                    </p>
-                </motion.div>
+        <section id="education" aria-labelledby="education-title" className="scroll-mt-20 py-20 md:py-28">
+            <div className="mx-auto max-w-6xl px-6">
+                <SectionHeading
+                    index={5}
+                    eyebrow={education.eyebrow}
+                    title={education.title}
+                    titleId="education-title"
+                    className="reveal"
+                />
 
-                {/* Education Card */}
-                {education.map((edu, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="relative bg-white dark:bg-slate-800/50 rounded-2xl p-8 md:p-10 shadow-xl border border-slate-200 dark:border-slate-700/50 overflow-hidden"
-                    >
-                        {/* Decorative gradient */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-yellow-500/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+                    <article className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+                        <span className="grid size-12 place-items-center rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                            <GraduationCap className="size-6" aria-hidden />
+                        </span>
+                        <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-white">{education.degree}</h3>
+                        <p className="mt-1 font-medium text-blue-700 dark:text-blue-400">{education.school}</p>
+                        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                            {education.period} · {education.location}
+                        </p>
+                        <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">{education.description}</p>
 
-                        <div className="relative grid md:grid-cols-3 gap-8">
-                            {/* Left Column - Main Info */}
-                            <div className="md:col-span-2 space-y-5">
-                                <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-blue-100 dark:bg-blue-500/20 rounded-xl shrink-0">
-                                        <GraduationCap size={28} className="text-blue-600 dark:text-blue-400" />
-                                    </div>
+                        <dl className="mt-6 grid grid-cols-2 gap-3">
+                            <div className="flex flex-col rounded-xl border border-slate-200 p-4 dark:border-white/10">
+                                <dt className="text-xs font-semibold tracking-wider text-slate-600 uppercase dark:text-slate-400">
+                                    {education.gpaLabel}
+                                </dt>
+                                <dd className="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">{education.gpa}</dd>
+                            </div>
+                            <div className="flex flex-col rounded-xl border border-amber-300/70 bg-amber-50 p-4 dark:border-amber-400/30 dark:bg-amber-400/10">
+                                <dt className="text-xs font-semibold tracking-wider text-amber-900 uppercase dark:text-amber-300">
+                                    {education.honorLabel}
+                                </dt>
+                                <dd className="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">{education.honor}</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <div className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+                        <h3 className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white">
+                            <Award className="size-5 text-amber-500" aria-hidden />
+                            {education.certificationsTitle}
+                        </h3>
+                        <ul className="mt-2 divide-y divide-slate-200 dark:divide-white/10">
+                            {certifications.map((cert) => (
+                                <li key={cert.title} className="flex items-start justify-between gap-4 py-4">
                                     <div>
-                                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                                            {edu.degree}
-                                        </h3>
-                                        <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mt-1">
-                                            {edu.school}
+                                        <p className="font-medium text-slate-900 dark:text-white">
+                                            {cert.url ? (
+                                                <a
+                                                    href={cert.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400"
+                                                >
+                                                    {cert.title}
+                                                    <ExternalLink className="size-3.5" aria-hidden />
+                                                </a>
+                                            ) : (
+                                                cert.title
+                                            )}
                                         </p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">{cert.issuer}</p>
                                     </div>
-                                </div>
-
-                                <div className="flex flex-wrap gap-4 text-sm text-slate-500 dark:text-slate-400">
-                                    <span className="flex items-center gap-1.5">
-                                        <Calendar size={16} />
-                                        {edu.period}
-                                    </span>
-                                    <span className="flex items-center gap-1.5">
-                                        <MapPin size={16} />
-                                        {edu.location}
-                                    </span>
-                                </div>
-
-                                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                                    {edu.description}
-                                </p>
-
-                                {/* Achievements */}
-                                <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">
-                                        {t('edu-achievements-title')}
-                                    </h4>
-                                    <ul className="space-y-2">
-                                        {edu.achievements.map((achievement, i) => (
-                                            <motion.li
-                                                key={i}
-                                                initial={{ opacity: 0, x: -10 }}
-                                                whileInView={{ opacity: 1, x: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: 0.3 + i * 0.1 }}
-                                                className="flex items-start gap-2 text-slate-600 dark:text-slate-300 text-sm"
-                                            >
-                                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
-                                                {achievement}
-                                            </motion.li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* Right Column - Stats */}
-                            <div className="flex flex-col items-center justify-center gap-6">
-                                {/* GPA Card */}
-                                <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    whileInView={{ scale: 1, opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.4, type: "spring" }}
-                                    className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-500/10 dark:to-blue-600/10 rounded-2xl w-full border border-blue-100 dark:border-blue-500/20"
-                                >
-                                    <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">GPA</p>
-                                    <p className="text-4xl font-bold text-slate-900 dark:text-white font-playfair">
-                                        {edu.gpa}
+                                    <p className="shrink-0 text-sm text-slate-600 tabular-nums dark:text-slate-400">
+                                        {formatMonthYear(cert.date, lang)}
                                     </p>
-                                </motion.div>
-
-                                {/* Honor Card */}
-                                <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    whileInView={{ scale: 1, opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.5, type: "spring" }}
-                                    className="text-center p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-500/10 dark:to-yellow-600/10 rounded-2xl w-full border border-yellow-100 dark:border-yellow-500/20"
-                                >
-                                    <Award size={32} className="text-yellow-500 mx-auto mb-2" />
-                                    <p className="text-lg font-bold text-slate-900 dark:text-white">
-                                        {edu.honor}
-                                    </p>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
-    );
+    )
 }

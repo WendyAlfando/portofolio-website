@@ -1,106 +1,63 @@
-"use client"
+import { CircleCheck } from "lucide-react"
+import SectionHeading from "@/components/ui/SectionHeading"
+import type { Dictionary } from "@/content/types"
+import { formatPeriod, type Locale } from "@/lib/i18n"
 
-import { motion } from "framer-motion"
-import { useTranslation } from "@/context/TranslationContext"
-import { Briefcase } from "lucide-react"
-
-export default function Experience() {
-    const { t } = useTranslation()
-
-    const experiences = [
-        {
-            titleKey: 'timeline-job1-title',
-            dateKey: 'timeline-job1-date',
-            descKey: 'timeline-job1-desc',
-        },
-        {
-            titleKey: 'timeline-job2-title',
-            dateKey: 'timeline-job2-date',
-            descKey: 'timeline-job2-desc',
-        },
-        {
-            titleKey: 'timeline-job3-title',
-            dateKey: 'timeline-job3-date',
-            descKey: 'timeline-job3-desc',
-        },
-        {
-            titleKey: 'timeline-job4-title',
-            dateKey: 'timeline-job4-date',
-            descKey: 'timeline-job4-desc',
-        }
-    ] as const
+export default function Experience({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+    const { experience } = dict
 
     return (
-        <section id="experience" className="py-24 bg-white dark:bg-slate-900 relative">
-            <div className="max-w-5xl mx-auto px-6">
+        <section
+            id="experience"
+            aria-labelledby="experience-title"
+            className="scroll-mt-20 border-y border-slate-200 bg-slate-50 py-20 md:py-28 dark:border-white/10 dark:bg-slate-900/40"
+        >
+            <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+                <SectionHeading
+                    index={2}
+                    eyebrow={experience.eyebrow}
+                    title={experience.title}
+                    titleId="experience-title"
+                    className="lg:sticky lg:top-28 lg:self-start"
+                />
 
-                {/* Section Header */}
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl font-bold font-playfair mb-4 text-slate-900 dark:text-white"
-                    >
-                        {t('experience-title')}
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
-                    >
-                        {t('experience-subtitle')}
-                    </motion.p>
-                </div>
-
-                {/* Timeline */}
                 <div className="relative">
-                    {/* Main vertical line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-blue-500/20 dark:bg-blue-500/30 transform md:-translate-x-1/2" />
+                    <span aria-hidden className="absolute top-2 bottom-2 left-[5px] w-px bg-slate-300 dark:bg-white/15" />
+                    <ol className="space-y-12">
+                        {experience.items.map((item) => (
+                            <li key={`${item.role}-${item.start}`} className="reveal relative pl-8">
+                                <span
+                                    aria-hidden
+                                    className="absolute top-1.5 left-0 size-[11px] rounded-full border-2 border-blue-500 bg-slate-50 dark:bg-slate-950"
+                                />
+                                <p className="text-sm font-medium text-blue-700 dark:text-blue-400">
+                                    {formatPeriod(item.start, item.end, lang, experience.present)}
+                                </p>
+                                <h3 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">{item.role}</h3>
+                                <p className="text-slate-600 dark:text-slate-400">{item.company}</p>
 
-                    {experiences.map((exp, index) => {
-                        const isLeft = index % 2 === 0
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30, x: isLeft ? -50 : 50 }}
-                                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className={`relative flex flex-col md:flex-row items-center justify-between mb-12 ${isLeft ? "md:flex-row-reverse" : ""
-                                    }`}
-                            >
-                                {/* Timeline dot */}
-                                <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900 transform -translate-x-1/2 mt-1.5 md:mt-0 z-10" />
+                                <ul className="mt-4 space-y-2.5">
+                                    {item.points.map((point) => (
+                                        <li key={point} className="flex gap-3 leading-relaxed text-slate-700 dark:text-slate-300">
+                                            <CircleCheck className="mt-1 size-4 shrink-0 text-blue-500" aria-hidden />
+                                            {point}
+                                        </li>
+                                    ))}
+                                </ul>
 
-                                <div className="w-full md:w-5/12 ml-12 md:ml-0" />
-
-                                {/* Content Card */}
-                                <div className="w-full md:w-5/12 ml-12 md:ml-0 group">
-                                    <div className="bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="p-2 bg-blue-500/10 rounded-lg text-blue-600 dark:text-blue-400">
-                                                <Briefcase size={20} />
-                                            </div>
-                                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                                                {t(exp.titleKey)}
-                                            </h3>
-                                        </div>
-                                        <div className="inline-block px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full mb-4">
-                                            {t(exp.dateKey)}
-                                        </div>
-                                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                                            {t(exp.descKey)}
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </motion.div>
-                        )
-                    })}
+                                <ul className="mt-4 flex flex-wrap gap-2">
+                                    {item.tags.map((tag) => (
+                                        <li
+                                            key={tag}
+                                            className="rounded-md bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-700 dark:text-blue-300"
+                                        >
+                                            {tag}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </div>
         </section>

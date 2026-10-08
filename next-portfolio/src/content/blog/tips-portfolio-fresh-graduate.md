@@ -2,11 +2,9 @@
 title: "Tips Membangun Portfolio yang Menarik untuk Fresh Graduate"
 date: "2025-02-25"
 excerpt: "Panduan praktis untuk membangun portfolio profesional yang bisa membuat Anda menonjol di mata recruiter, terutama untuk fresh graduate."
-author: "Wendy Alfando"
+lang: "id"
 tags: ["Career", "Portfolio", "Tips"]
 ---
-
-# Tips Membangun Portfolio yang Menarik untuk Fresh Graduate
 
 Sebagai fresh graduate, salah satu tantangan terbesar adalah bagaimana membuktikan kemampuan kita tanpa pengalaman kerja yang panjang. Jawabannya? **Portfolio yang kuat.**
 
@@ -36,8 +34,8 @@ Jangan hanya menampilkan hasil akhir. Ceritakan:
 
 Untuk portfolio ini, saya menggunakan:
 - **Next.js** — Framework React modern
+- **TypeScript** — Kode lebih aman dan mudah dirawat
 - **Tailwind CSS** — Styling yang efisien
-- **Framer Motion** — Animasi yang smooth
 - **Vercel** — Hosting gratis dan cepat
 
 ## Kesimpulan
@@ -46,4 +44,4 @@ Portfolio bukan sekadar pajangan, tetapi alat yang powerful untuk membuka peluan
 
 ---
 
-*Punya pertanyaan tentang cara membuat portfolio? [Hubungi saya](#contact)!*
+*Punya pertanyaan tentang cara membuat portfolio? [Hubungi saya](/id#contact)!*

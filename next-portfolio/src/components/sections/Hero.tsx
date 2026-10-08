@@ -1,144 +1,94 @@
-"use client"
-
-import { motion } from "framer-motion"
 import Image from "next/image"
-import { useTranslation } from "@/context/TranslationContext"
-import ParticleBackground from "@/components/ui/ParticleBackground"
-import TypingEffect from "@/components/ui/TypingEffect"
-import { ArrowRight, Download, Briefcase } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
+import SocialLinks from "@/components/ui/SocialLinks"
+import { profile } from "@/content/profile"
+import type { Dictionary } from "@/content/types"
+import { yearsSince } from "@/lib/i18n"
 
-export default function Hero() {
-    const { t } = useTranslation()
+export default function Hero({ dict }: { dict: Dictionary }) {
+    const { hero } = dict
+    const years = String(yearsSince(profile.careerStart))
 
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-            {/* Dynamic Particle Background */}
-            <ParticleBackground />
+        <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+            {/* Decorative background: a fading grid and two soft glows, no JavaScript involved */}
+            <div
+                aria-hidden
+                className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,black,transparent)]"
+            />
+            <div
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-[radial-gradient(640px_circle_at_10%_5%,rgb(59_130_246/0.16),transparent_60%),radial-gradient(520px_circle_at_90%_45%,rgb(251_191_36/0.10),transparent_60%)]"
+            />
 
-            {/* Decorative Gradient Orbs */}
-            <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-yellow-500/20 rounded-full blur-[100px] pointer-events-none" />
+            <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-10 pb-12 md:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16 lg:pt-20 lg:pb-16">
+                <div>
+                    <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
+                        <span aria-hidden className="size-1.5 rounded-full bg-blue-500" />
+                        {hero.kicker}
+                    </p>
 
-            <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
-
-                {/* Left Side: Text Content */}
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="flex flex-col gap-6"
-                >
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-600 dark:text-blue-400 font-medium text-sm w-fit"
+                    <h1
+                        id="hero-title"
+                        className="mt-6 font-display text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl dark:text-white"
                     >
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                        </span>
-                        {t('hero-subtitle')}
-                    </motion.div>
+                        {profile.name}
+                    </h1>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.35, duration: 0.4 }}
-                        className="text-sm text-blue-500 dark:text-blue-400 font-medium h-6"
-                    >
-                        <TypingEffect
-                            words={[t('typing-word1'), t('typing-word2'), t('typing-word3'), t('typing-word4')]}
-                        />
-                    </motion.div>
+                    <p className="mt-5 max-w-xl text-xl leading-snug font-medium text-pretty text-slate-800 sm:text-2xl dark:text-slate-100">
+                        {hero.headline.before}
+                        <span className="text-gradient">{hero.headline.highlight}</span>
+                        {hero.headline.after}
+                    </p>
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                        className="text-5xl md:text-6xl lg:text-7xl font-bold font-playfair leading-tight text-slate-900 dark:text-white"
-                    >
-                        <span className="block">Wendy Alfando</span>
-                        <span className="block text-3xl md:text-4xl lg:text-5xl mt-2 pb-2 leading-relaxed bg-gradient-to-r from-blue-600 dark:from-blue-400 to-yellow-500 bg-clip-text text-transparent">
-                            {t('hero-title')}
-                        </span>
-                    </motion.h1>
+                    <p className="mt-5 max-w-xl leading-relaxed text-slate-600 dark:text-slate-400">{hero.summary}</p>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.6 }}
-                        className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl"
-                    >
-                        {t('hero-description')}
-                    </motion.p>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.6 }}
-                        className="flex flex-wrap items-center gap-4 mt-4"
-                    >
+                    <div className="mt-8 flex flex-wrap items-center gap-3">
                         <a
                             href="#projects"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-slate-900/20 dark:shadow-white/10 group"
+                            className="group inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-colors hover:bg-blue-500"
                         >
-                            <Briefcase size={20} className="group-hover:-translate-y-1 transition-transform" />
-                            {t('btn-portfolio')}
+                            {hero.ctaPrimary}
+                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
                         </a>
-
                         <a
-                            href="/CV_Wendy_Alfando.pdf"
-                            target="_blank"
+                            href={profile.cv}
                             download
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white rounded-xl font-semibold hover:bg-slate-900/5 dark:hover:bg-white/5 hover:scale-105 active:scale-95 transition-all group"
+                            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 dark:border-white/15 dark:text-white dark:hover:bg-white/5"
                         >
-                            <Download size={20} className="group-hover:translate-y-1 transition-transform" />
-                            {t('btn-cv')}
+                            <Download className="size-4" aria-hidden />
+                            {hero.ctaCv}
                         </a>
-                    </motion.div>
-                </motion.div>
+                    </div>
 
-                {/* Right Side: Image blending into background */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="relative lg:ml-auto flex justify-center lg:justify-end"
-                >
-                    <motion.div
-                        animate={{
-                            y: [0, -15, 0],
-                        }}
-                        transition={{
-                            duration: 5,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        className="relative w-[22rem] h-[22rem] md:w-[30rem] md:h-[30rem] group"
-                    >
-                        {/* Glow behind the photo */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-yellow-500/10 rounded-full blur-3xl scale-110" />
+                    <SocialLinks label={hero.socialLabel} className="mt-8" />
+                </div>
 
-                        {/* Profile image — no border, edges fade to transparent */}
-                        <div
-                            className="relative w-full h-full"
-                            style={{
-                                WebkitMaskImage: "radial-gradient(ellipse 75% 80% at 50% 45%, black 40%, transparent 100%)",
-                                maskImage: "radial-gradient(ellipse 75% 80% at 50% 45%, black 40%, transparent 100%)",
-                            }}
-                        >
-                            <Image
-                                src="/images/Profile.png"
-                                alt="Wendy Alfando"
-                                fill
-                                priority
-                                sizes="(max-width: 768px) 352px, 480px"
-                                className="object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                            />
+                {/* Arch-shaped frame; the bottom fades into the page so the portrait has no hard edge */}
+                <div className="relative order-first mx-auto aspect-[4/5] w-44 overflow-hidden rounded-t-full border border-b-0 border-slate-200 bg-linear-to-b from-blue-100 via-slate-50 to-white [mask-image:linear-gradient(to_bottom,black_78%,transparent)] sm:w-56 lg:order-none lg:w-full lg:max-w-sm dark:border-white/10 dark:from-blue-500/25 dark:via-slate-900 dark:to-slate-950">
+                    <Image
+                        src={profile.photo}
+                        alt={hero.photoAlt}
+                        fill
+                        sizes="(min-width: 1024px) 384px, (min-width: 640px) 224px, 176px"
+                        loading="eager"
+                        fetchPriority="high"
+                        className="object-cover object-top pt-[6%]"
+                    />
+                </div>
+            </div>
+
+            <div className="mx-auto max-w-6xl px-6 pb-16 lg:pb-24">
+                <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 md:grid-cols-4 dark:border-white/10 dark:bg-white/10">
+                    {dict.highlights.map((item) => (
+                        <div key={item.label} className="flex flex-col gap-1 bg-white p-5 md:p-6 dark:bg-slate-950">
+                            <dt className="text-sm leading-snug text-slate-600 dark:text-slate-400">{item.label}</dt>
+                            <dd className="order-first font-display text-3xl font-bold text-slate-900 md:text-4xl dark:text-white">
+                                {item.value.replace("{years}", years)}
+                            </dd>
                         </div>
-                    </motion.div>
-                </motion.div>
+                    ))}
+                </dl>
             </div>
         </section>
     )

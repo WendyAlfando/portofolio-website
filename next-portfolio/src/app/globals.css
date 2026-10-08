@@ -1,69 +1,77 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:is(.dark *));
 
-@theme {
-  --color-primary: #3b82f6;
-  --color-secondary: #fcd34d;
-  --color-secondary-dark: #f59e0b;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  --color-light-bg: #f8fafc;
-  --color-light-text: #1e293b;
-  --color-light-gray: #f1f5f9;
+/* next/font puts --font-geist and --font-playfair on <html>; "inline" makes the utilities read them there */
+@theme inline {
+    --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+    --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+}
 
-  --color-dark-bg: #0f172a;
-  --color-dark-text: #f8fafc;
-  --color-dark-surface: #1e293b;
+/* Gradient text stays above 4.5:1 contrast: blue to indigo on light, blue to amber on dark */
+:root {
+    --grid-line: rgb(15 23 42 / 0.06);
+    --gradient-from: #1d4ed8;
+    --gradient-to: #4f46e5;
+}
+
+.dark {
+    --grid-line: rgb(255 255 255 / 0.05);
+    --gradient-from: #60a5fa;
+    --gradient-to: #fcd34d;
 }
 
 @layer base {
-  :root {
-    --background: var(--color-light-bg);
-    --foreground: var(--color-light-text);
-    --surface: #ffffff;
-    --border: rgba(15, 23, 42, 0.1);
-  }
+    ::selection {
+        background-color: rgb(59 130 246 / 0.28);
+    }
 
-  /* Note: Next-Themes will toggle this class */
-  .dark {
-    --background: var(--color-dark-bg);
-    --foreground: var(--color-dark-text);
-    --surface: var(--color-dark-surface);
-    --border: rgba(255, 255, 255, 0.1);
-  }
-
-  * {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    @apply transition-colors duration-300;
-  }
-
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
-    border-radius: 6px;
-  }
+    :where(a, button, input, textarea, summary):focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 3px;
+    }
 }
 
-/* Base utility for hiding the default cursor later */
-.custom-cursor-active {
-  cursor: none !important;
+@utility text-gradient {
+    background-image: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-.custom-cursor-active a,
-.custom-cursor-active button,
-.custom-cursor-active [role="button"] {
-  cursor: none !important;
+@utility bg-grid {
+    background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+}
+
+/*
+ * Section reveal on scroll, in CSS only. Content is fully visible by default: browsers without
+ * scroll-driven animations, users who prefer reduced motion and crawlers all get static content.
+ */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    @supports (animation-timeline: view()) {
+        .reveal {
+            animation: reveal-up linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 20%;
+        }
+    }
+}
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }

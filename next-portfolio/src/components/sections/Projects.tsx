@@ -1,274 +1,137 @@
-"use client"
+import Link from "next/link"
+import { ArrowUpRight, Sparkles } from "lucide-react"
+import SectionHeading from "@/components/ui/SectionHeading"
+import type { Dictionary } from "@/content/types"
+import { getAllPosts } from "@/lib/blog"
+import { localePath } from "@/lib/i18n"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useTranslation } from "@/context/TranslationContext"
+const labelClass = "text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400"
 
-interface Project {
-    id: string
-    category: "all" | "rpa" | "testing" | "systems"
-    icon: string
-    titleKey: any // using any for TranslationKey ease here
-    roleLabelKey: any
-    roleKey: any
-    analysisLabelKey: any
-    analysisKey: any
-    resultLabelKey: any
-    resultKey: any
-    metric1Value: string
-    metric1Key: any
-    metric2Value: string
-    metric2Key: any
-}
-
-const projectsData: Project[] = [
-    {
-        id: "p1",
-        category: "rpa",
-        icon: "🤖",
-        titleKey: "project1-title",
-        roleLabelKey: "project1-role-label",
-        roleKey: "project1-role",
-        analysisLabelKey: "project1-analysis-label",
-        analysisKey: "project1-analysis",
-        resultLabelKey: "project1-result-label",
-        resultKey: "project1-result",
-        metric1Value: "5+",
-        metric1Key: "project1-metric1",
-        metric2Value: "-70%",
-        metric2Key: "project1-metric2",
-    },
-    {
-        id: "p2",
-        category: "testing",
-        icon: "🔍",
-        titleKey: "project2-title",
-        roleLabelKey: "project2-scope-label",
-        roleKey: "project2-scope",
-        analysisLabelKey: "project2-approach-label",
-        analysisKey: "project2-approach",
-        resultLabelKey: "project2-result-label",
-        resultKey: "project2-result",
-        metric1Value: "95%",
-        metric1Key: "project2-metric1",
-        metric2Value: "+30%",
-        metric2Key: "project2-metric2",
-    },
-    {
-        id: "p3",
-        category: "systems",
-        icon: "🌐",
-        titleKey: "project3-title",
-        roleLabelKey: "project3-scope-label",
-        roleKey: "project3-scope",
-        analysisLabelKey: "project3-approach-label",
-        analysisKey: "project3-approach",
-        resultLabelKey: "project3-result-label",
-        resultKey: "project3-result",
-        metric1Value: "100%",
-        metric1Key: "project3-metric1",
-        metric2Value: "Zero",
-        metric2Key: "project3-metric2",
-    },
-    {
-        id: "p4",
-        category: "testing",
-        icon: "📋",
-        titleKey: "project4-title",
-        roleLabelKey: "project4-scope-label",
-        roleKey: "project4-scope",
-        analysisLabelKey: "project4-approach-label",
-        analysisKey: "project4-approach",
-        resultLabelKey: "project4-result-label",
-        resultKey: "project4-result",
-        metric1Value: "95%",
-        metric1Key: "project4-metric1",
-        metric2Value: "+25%",
-        metric2Key: "project4-metric2",
-    },
-    {
-        id: "p5",
-        category: "systems",
-        icon: "🤝",
-        titleKey: "project5-title",
-        roleLabelKey: "project5-scope-label",
-        roleKey: "project5-scope",
-        analysisLabelKey: "project5-approach-label",
-        analysisKey: "project5-approach",
-        resultLabelKey: "project5-result-label",
-        resultKey: "project5-result",
-        metric1Value: "+30%",
-        metric1Key: "project5-metric1",
-        metric2Value: "CRM",
-        metric2Key: "project5-metric2",
-    },
-    {
-        id: "p6",
-        category: "rpa",
-        icon: "📊",
-        titleKey: "project6-title",
-        roleLabelKey: "project6-scope-label",
-        roleKey: "project6-scope",
-        analysisLabelKey: "project6-approach-label",
-        analysisKey: "project6-approach",
-        resultLabelKey: "project6-result-label",
-        resultKey: "project6-result",
-        metric1Value: "10+",
-        metric1Key: "project6-metric1",
-        metric2Value: "100%",
-        metric2Key: "project6-metric2",
-    }
-]
-
-export default function Projects() {
-    const { t } = useTranslation()
-    const [filter, setFilter] = useState<"all" | "rpa" | "testing" | "systems">("all")
-
-    const filteredProjects = projectsData.filter(
-        (p) => filter === "all" || p.category === filter
-    )
-
-    const filters = [
-        { id: "all", label: "filter-all" },
-        { id: "rpa", label: "filter-rpa" },
-        { id: "testing", label: "filter-testing" },
-        { id: "systems", label: "filter-systems" },
-    ]
+export default function Projects({ dict }: { dict: Dictionary }) {
+    const { projects } = dict
+    const { featured, labels } = projects
+    // Link the longer write-up in whichever language the post was written in
+    const story = featured.storySlug ? getAllPosts().find((post) => post.slug === featured.storySlug) : undefined
 
     return (
-        <section id="projects" className="py-24 bg-slate-50 dark:bg-slate-900/50">
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Section Header */}
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl font-bold font-playfair mb-4 text-slate-900 dark:text-white"
-                    >
-                        {t('projects-title')}
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10"
-                    >
-                        {t('projects-subtitle')}
-                    </motion.p>
+        <section id="projects" aria-labelledby="projects-title" className="scroll-mt-20 py-20 md:py-28">
+            <div className="mx-auto max-w-6xl px-6">
+                <SectionHeading
+                    index={3}
+                    eyebrow={projects.eyebrow}
+                    title={projects.title}
+                    subtitle={projects.subtitle}
+                    titleId="projects-title"
+                    className="reveal"
+                />
 
-                    {/* Filters */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="flex flex-wrap justify-center gap-4"
-                    >
-                        {filters.map((f) => (
-                            <button
-                                key={f.id}
-                                onClick={() => setFilter(f.id as any)}
-                                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${filter === f.id
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 -translate-y-1"
-                                    : "bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
-                                    }`}
+                <article className="reveal mt-12 grid gap-10 rounded-3xl border border-slate-200 bg-linear-to-br from-blue-50 via-white to-amber-50/70 p-6 sm:p-8 md:p-10 lg:grid-cols-[1.35fr_1fr] dark:border-white/10 dark:from-blue-500/10 dark:via-slate-950 dark:to-amber-400/5">
+                    <div>
+                        <p className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/20 px-3 py-1 text-xs font-semibold text-amber-900 dark:bg-amber-400/15 dark:text-amber-300">
+                            <Sparkles className="size-3.5" aria-hidden />
+                            {projects.featuredLabel}
+                        </p>
+                        <h3 className="mt-4 font-display text-2xl font-bold text-balance text-slate-900 md:text-3xl dark:text-white">
+                            {featured.title}
+                        </h3>
+
+                        <dl className="mt-6 space-y-5 leading-relaxed text-slate-700 dark:text-slate-300">
+                            <div>
+                                <dt className={labelClass}>{labels.context}</dt>
+                                <dd className="mt-1">{featured.context}</dd>
+                            </div>
+                            <div>
+                                <dt className={labelClass}>{labels.role}</dt>
+                                <dd className="mt-1">{featured.role}</dd>
+                            </div>
+                            <div>
+                                <dt className={labelClass}>{labels.approach}</dt>
+                                <dd>
+                                    <ol className="mt-2 space-y-2.5">
+                                        {featured.approach.map((step, index) => (
+                                            <li key={step} className="flex gap-3">
+                                                <span
+                                                    aria-hidden
+                                                    className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-blue-600 text-xs font-semibold text-white"
+                                                >
+                                                    {index + 1}
+                                                </span>
+                                                {step}
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        {/* Compact rows on phones, cards side by side on tablets, a column next to the story on desktop */}
+                        <dl className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                            {featured.metrics.map((metric) => (
+                                <div
+                                    key={metric.label}
+                                    className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 sm:flex-col sm:items-start sm:gap-1 sm:p-5 dark:border-white/10 dark:bg-slate-950/60"
+                                >
+                                    <dt className="text-sm leading-snug text-slate-600 dark:text-slate-400">{metric.label}</dt>
+                                    <dd className="order-first min-w-16 font-display text-3xl font-bold text-blue-600 sm:text-4xl dark:text-blue-400">
+                                        {metric.value}
+                                    </dd>
+                                </div>
+                            ))}
+                        </dl>
+                        <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 dark:border-white/10 dark:bg-slate-950/60">
+                            <p className={labelClass}>{labels.result}</p>
+                            <p className="mt-1 leading-relaxed text-slate-700 dark:text-slate-300">{featured.result}</p>
+                        </div>
+                        {story && (
+                            <Link
+                                href={localePath(story.lang, `/blog/${story.slug}`)}
+                                hrefLang={story.lang}
+                                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:underline dark:text-blue-400"
                             >
-                                {t(f.label as any)}
-                            </button>
-                        ))}
-                    </motion.div>
-                </div>
+                                {projects.storyLink}
+                                <ArrowUpRight className="size-4" aria-hidden />
+                            </Link>
+                        )}
+                    </div>
+                </article>
 
-                {/* Projects Grid */}
-                <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <ProjectCard key={project.id} project={project} t={t} />
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                <ul className="mt-6 grid gap-6 md:grid-cols-2">
+                    {projects.items.map((item) => (
+                        <li
+                            key={item.title}
+                            className="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]"
+                        >
+                            <div className="flex items-start justify-between gap-4">
+                                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-white/10 dark:text-slate-300">
+                                    {item.category}
+                                </span>
+                                {item.metric && (
+                                    <p className="text-right">
+                                        <span className="block font-display text-3xl leading-none font-bold text-blue-600 dark:text-blue-400">
+                                            {item.metric.value}
+                                        </span>
+                                        <span className="mt-1 block text-xs text-slate-600 dark:text-slate-400">{item.metric.label}</span>
+                                    </p>
+                                )}
+                            </div>
+                            <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                            <p className="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">{item.summary}</p>
+                            <dl className="mt-5 space-y-3 border-t border-slate-200 pt-5 text-sm dark:border-white/10">
+                                <div>
+                                    <dt className="font-semibold text-slate-900 dark:text-white">{labels.approach}</dt>
+                                    <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.approach}</dd>
+                                </div>
+                                <div>
+                                    <dt className="font-semibold text-slate-900 dark:text-white">{labels.result}</dt>
+                                    <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.result}</dd>
+                                </div>
+                            </dl>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </section>
-    )
-}
-
-function ProjectCard({ project, t }: { project: Project; t: any }) {
-    // Setup mouse tracking for the 3D Tilt effect
-    const [rx, setRx] = useState(0)
-    const [ry, setRy] = useState(0)
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const rect = e.currentTarget.getBoundingClientRect()
-        const width = rect.width
-        const height = rect.height
-
-        const mouseX = e.clientX - rect.left
-        const mouseY = e.clientY - rect.top
-
-        const maxRotation = 15 // maximum degrees
-        const rY = ((mouseX / width) - 0.5) * maxRotation
-        const rX = ((mouseY / height) - 0.5) * -maxRotation
-
-        setRy(rY)
-        setRx(rX)
-    }
-
-    const handleMouseLeave = () => {
-        setRx(0)
-        setRy(0)
-    }
-
-    return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.4 }}
-            // Apply 3D perspective to parent
-            style={{ perspective: 1000 }}
-            className="h-full"
-        >
-            <motion.div
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                animate={{ rotateX: rx, rotateY: ry }}
-                transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.5 }}
-                className="h-full bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-100 dark:border-slate-700 flex flex-col items-start gap-4 transition-shadow hover:shadow-2xl"
-            >
-                <div className="w-14 h-14 bg-slate-50 dark:bg-slate-700/50 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                    {project.icon}
-                </div>
-
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
-                    {t(project.titleKey)}
-                </h3>
-
-                <div className="flex-1 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                    <p>
-                        <strong className="text-slate-900 dark:text-slate-100">{t(project.roleLabelKey)}</strong> {t(project.roleKey)}
-                    </p>
-                    <p>
-                        <strong className="text-slate-900 dark:text-slate-100">{t(project.analysisLabelKey)}</strong> {t(project.analysisKey)}
-                    </p>
-                    <p>
-                        <strong className="text-slate-900 dark:text-slate-100">{t(project.resultLabelKey)}</strong> {t(project.resultKey)}
-                    </p>
-                </div>
-
-                <div className="flex w-full mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
-                    <div className="flex-1">
-                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{project.metric1Value}</div>
-                        <div className="text-xs text-slate-500 font-medium uppercase tracking-wider">{t(project.metric1Key)}</div>
-                    </div>
-                    <div className="flex-1 border-l border-slate-100 dark:border-slate-700 pl-4">
-                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{project.metric2Value}</div>
-                        <div className="text-xs text-slate-500 font-medium uppercase tracking-wider">{t(project.metric2Key)}</div>
-                    </div>
-                </div>
-            </motion.div>
-        </motion.div>
     )
 }

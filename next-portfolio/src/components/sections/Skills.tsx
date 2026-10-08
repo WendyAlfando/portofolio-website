@@ -1,131 +1,56 @@
-"use client"
+import { Bot, ClipboardCheck, FileSearch } from "lucide-react"
+import SectionHeading from "@/components/ui/SectionHeading"
+import type { Dictionary } from "@/content/types"
 
-import { motion } from "framer-motion"
-import { useTranslation } from "@/context/TranslationContext"
+// In the same order as skills.groups: business analysis, quality assurance, data & automation
+const groupIcons = [FileSearch, ClipboardCheck, Bot]
 
-interface Skill {
-    name: string;
-    percentage: number;
-}
-
-interface SkillCategory {
-    title: string;
-    icon: string;
-    skills: Skill[];
-}
-
-const skillsData: SkillCategory[] = [
-    {
-        title: "Data Analysis",
-        icon: "📊",
-        skills: [
-            { name: "Power BI", percentage: 90 },
-            { name: "SQL", percentage: 85 },
-            { name: "Excel Advanced", percentage: 95 },
-            { name: "Python", percentage: 75 },
-            { name: "RPA Tools", percentage: 80 },
-        ]
-    },
-    {
-        title: "Process Analysis",
-        icon: "🔄",
-        skills: [
-            { name: "Business Process Mapping", percentage: 88 },
-            { name: "Requirements Gathering", percentage: 92 },
-            { name: "Gap Analysis", percentage: 85 },
-            { name: "Process Optimization", percentage: 87 },
-            { name: "Quality Assurance & Testing", percentage: 85 },
-        ]
-    },
-    {
-        title: "Soft Skills",
-        icon: "🤝",
-        skills: [
-            { name: "Leadership", percentage: 90 },
-            { name: "Problem Solving", percentage: 95 },
-            { name: "Communication", percentage: 88 },
-            { name: "Teamwork", percentage: 92 },
-            { name: "Time Management", percentage: 85 },
-        ]
-    }
-]
-
-export default function Skills() {
-    const { t } = useTranslation()
+export default function Skills({ dict }: { dict: Dictionary }) {
+    const { skills } = dict
 
     return (
-        <section id="skills" className="py-24 bg-white dark:bg-slate-900">
-            <div className="max-w-7xl mx-auto px-6">
+        <section
+            id="skills"
+            aria-labelledby="skills-title"
+            className="scroll-mt-20 border-y border-slate-200 bg-slate-50 py-20 md:py-28 dark:border-white/10 dark:bg-slate-900/40"
+        >
+            <div className="mx-auto max-w-6xl px-6">
+                <SectionHeading
+                    index={4}
+                    eyebrow={skills.eyebrow}
+                    title={skills.title}
+                    subtitle={skills.subtitle}
+                    titleId="skills-title"
+                    className="reveal"
+                />
 
-                {/* Section Header */}
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl font-bold font-playfair mb-4 text-slate-900 dark:text-white"
-                    >
-                        {t('skills-title')}
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
-                    >
-                        {t('skills-subtitle')}
-                    </motion.p>
-                </div>
-
-                {/* Skills Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {skillsData.map((category, idx) => (
-                        <motion.div
-                            key={category.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.6, delay: idx * 0.1 }}
-                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            className="bg-slate-50 dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5 hover:border-blue-200 dark:hover:border-blue-500/30 transition-all duration-300 group/card"
-                        >
-                            <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
-                                <span className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm text-2xl group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-300">
-                                    {category.icon}
-                                </span>
-                                {category.title}
-                            </h3>
-
-                            <div className="space-y-6">
-                                {category.skills.map((skill, sIdx) => (
-                                    <div key={skill.name}>
-                                        <div className="flex justify-between mb-2">
-                                            <span className="font-medium text-slate-700 dark:text-slate-300">
-                                                {skill.name}
-                                            </span>
-                                            <span className="text-blue-600 dark:text-blue-400 font-bold">
-                                                {skill.percentage}%
-                                            </span>
-                                        </div>
-                                        <div className="h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${skill.percentage}%` }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 1, delay: 0.3 + (sIdx * 0.1), ease: "easeOut" }}
-                                                className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full relative"
-                                            >
-                                                {/* Glowing Tip */}
-                                                <div className="absolute top-0 right-0 bottom-0 w-4 bg-white/30 rounded-full blur-[2px]" />
-                                            </motion.div>
-                                        </div>
-                                    </div>
-                                ))}
+                <div className="mt-12 grid gap-6 md:grid-cols-3">
+                    {skills.groups.map((group, index) => {
+                        const Icon = groupIcons[index % groupIcons.length]
+                        return (
+                            <div
+                                key={group.title}
+                                className="reveal rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-950"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <span className="grid size-10 place-items-center rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                        <Icon className="size-5" aria-hidden />
+                                    </span>
+                                    <h3 className="font-semibold text-slate-900 dark:text-white">{group.title}</h3>
+                                </div>
+                                <ul className="mt-5 flex flex-wrap gap-2">
+                                    {group.items.map((skill) => (
+                                        <li
+                                            key={skill}
+                                            className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+                                        >
+                                            {skill}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        </motion.div>
-                    ))}
+                        )
+                    })}
                 </div>
             </div>
         </section>

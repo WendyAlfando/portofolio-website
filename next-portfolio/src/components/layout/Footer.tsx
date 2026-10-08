@@ -1,83 +1,76 @@
-"use client"
+import Link from "next/link"
+import { ArrowUp } from "lucide-react"
+import SocialLinks from "@/components/ui/SocialLinks"
+import { profile } from "@/content/profile"
+import type { Dictionary } from "@/content/types"
+import type { Locale } from "@/lib/i18n"
+import { navLinks } from "./Header"
 
-import { useTranslation } from "@/context/TranslationContext"
-import { Linkedin, Mail, MessageCircle } from "lucide-react"
+const linkClass = "text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+const external = { target: "_blank", rel: "noopener noreferrer" }
 
-export default function Footer() {
-    const { t } = useTranslation()
-
+export default function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     return (
-        <footer className="bg-slate-900 border-t border-slate-800 text-slate-300">
-            <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
-                <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-
-                    {/* Brand & Social */}
-                    <div className="lg:col-span-6">
-                        <h3 className="text-3xl font-bold font-playfair text-white mb-4">
-                            Wendy Alfando
-                        </h3>
-                        <p className="text-slate-400 mb-8 max-w-sm">
-                            {t('footer-tagline')}
-                        </p>
-                        <div className="flex gap-4">
-                            <a
-                                href="https://www.linkedin.com/in/wendyalfando"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors"
-                            >
-                                <Linkedin size={20} />
-                            </a>
-                            <a
-                                href="https://wa.me/6287771365529"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors"
-                            >
-                                <MessageCircle size={20} />
-                            </a>
-                            <a
-                                href="mailto:wendyalfando02@gmail.com"
-                                className="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors"
-                            >
-                                <Mail size={20} />
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Navigation Links */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-white font-bold tracking-wider uppercase mb-6 text-sm">
-                            {t('footer-navigation')}
-                        </h4>
-                        <ul className="space-y-4">
-                            <li><a href="#about" className="hover:text-blue-400 transition-colors">{t('nav-about')}</a></li>
-                            <li><a href="#experience" className="hover:text-blue-400 transition-colors">{t('nav-experience')}</a></li>
-                            <li><a href="#projects" className="hover:text-blue-400 transition-colors">{t('nav-projects')}</a></li>
-                            <li><a href="/blog" className="hover:text-blue-400 transition-colors">Blog</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Services/Quick Links */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-white font-bold tracking-wider uppercase mb-6 text-sm">
-                            {t('footer-services')}
-                        </h4>
-                        <ul className="space-y-4">
-                            <li><a href="#skills" className="hover:text-blue-400 transition-colors">{t('nav-skills')}</a></li>
-                            {/* <li><a href="#testimonials" className="hover:text-blue-400 transition-colors">{t('nav-testimonials')}</a></li> */}
-                            <li><a href="#contact" className="hover:text-blue-400 transition-colors">{t('nav-contact')}</a></li>
-                        </ul>
-                    </div>
-
+        <footer className="border-t border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-slate-950">
+            <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.6fr_1fr_1fr]">
+                <div>
+                    <p className="font-display text-2xl font-bold text-slate-900 dark:text-white">{profile.name}</p>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{dict.footer.tagline}</p>
+                    <SocialLinks label={dict.hero.socialLabel} className="mt-6" />
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-slate-800 text-sm text-slate-400">
-                    <p>&copy; {new Date().getFullYear()} Wendy Alfando Portfolio. {t('footer-rights')}</p>
-                    <p className="mt-4 md:mt-0">
-                        {t('footer-made-with')} 🚀
+                <nav aria-labelledby="footer-nav-title">
+                    <h2 id="footer-nav-title" className="text-sm font-semibold text-slate-900 dark:text-white">
+                        {dict.footer.navTitle}
+                    </h2>
+                    <ul className="mt-4 space-y-3 text-sm">
+                        {navLinks(lang, dict).map((link) => (
+                            <li key={link.href}>
+                                <Link href={link.href} className={linkClass}>
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                <div>
+                    <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{dict.footer.linksTitle}</h2>
+                    <ul className="mt-4 space-y-3 text-sm">
+                        <li>
+                            <a href={profile.cv} download className={linkClass}>
+                                {dict.footer.cv}
+                            </a>
+                        </li>
+                        <li>
+                            <a href={profile.linkedin} {...external} className={linkClass}>
+                                LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a href={profile.github} {...external} className={linkClass}>
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href={profile.sourceCode} {...external} className={linkClass}>
+                                {dict.footer.source}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="border-t border-slate-200 dark:border-white/10">
+                <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
+                    <p>
+                        © {new Date().getFullYear()} {profile.name}. {dict.footer.builtWith}
                     </p>
+                    {/* "#top" scrolls to the start of the document without needing a matching element */}
+                    <a href="#top" className="inline-flex items-center gap-1.5 hover:text-slate-900 dark:hover:text-white">
+                        {dict.footer.backToTop}
+                        <ArrowUp className="size-4" aria-hidden />
+                    </a>
                 </div>
             </div>
         </footer>

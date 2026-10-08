@@ -2,11 +2,9 @@
 title: "Bagaimana RPA Menghemat 70% Waktu Proses Bisnis"
 date: "2025-02-20"
 excerpt: "Pelajari bagaimana implementasi Robotic Process Automation (RPA) berhasil mengoptimalkan proses bisnis dan menghemat waktu operasional secara signifikan."
-author: "Wendy Alfando"
+lang: "id"
 tags: ["RPA", "Business Process", "Automation"]
 ---
-
-# Bagaimana RPA Menghemat 70% Waktu Proses Bisnis
 
 Dalam dunia bisnis modern, efisiensi adalah kunci. Salah satu teknologi yang semakin populer untuk meningkatkan efisiensi adalah **Robotic Process Automation (RPA)**. Dalam artikel ini, saya akan berbagi pengalaman implementasi RPA yang berhasil menghemat 70% waktu proses bisnis.
 
@@ -46,7 +44,7 @@ RPA adalah teknologi yang memungkinkan kita membuat "robot" perangkat lunak yang
 
 Implementasi RPA bukan hanya tentang teknologi, tetapi juga tentang **pemahaman proses bisnis** yang mendalam. Sebagai Business Analyst, peran saya dalam menganalisis dan mendokumentasikan proses adalah kunci keberhasilan proyek ini.
 
-> *"Otomasi yang berhasil dimulai dari pemahaman yang mendalam tentang proses yang ingin diotomasi."*
+> Otomasi yang berhasil dimulai dari pemahaman yang mendalam tentang proses yang ingin diotomasi.
 
 ## Kesimpulan
 
@@ -54,4 +52,4 @@ RPA adalah investasi yang sangat berharga untuk perusahaan yang ingin meningkatk
 
 ---
 
-*Tertarik untuk berdiskusi tentang RPA? Jangan ragu untuk [menghubungi saya](#contact)!*
+*Tertarik untuk berdiskusi tentang RPA? Jangan ragu untuk [menghubungi saya](/id#contact)!*
