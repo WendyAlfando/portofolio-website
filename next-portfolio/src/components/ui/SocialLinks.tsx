@@ -18,7 +18,7 @@ export default function SocialLinks({ label, className = "" }: { label: string; 
                         aria-label={name}
                         title={name}
                         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:border-blue-500/50 hover:text-blue-600 dark:border-white/10 dark:text-slate-300 dark:hover:border-blue-400/50 dark:hover:text-blue-400"
+                        className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-600 transition hover:-translate-y-0.5 hover:border-blue-500/50 hover:text-blue-600 dark:border-white/10 dark:text-slate-300 dark:hover:border-blue-400/50 dark:hover:text-blue-400"
                     >
                         <Icon className="size-[18px]" aria-hidden />
                     </a>

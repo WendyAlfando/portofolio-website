@@ -45,7 +45,7 @@ export default function MobileNav({ links, label, openLabel, closeLabel }: Mobil
                 <nav
                     id="mobile-nav"
                     aria-label={label}
-                    className="absolute inset-x-0 top-full border-b border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-slate-950"
+                    className="menu-in absolute inset-x-0 top-full border-b border-slate-200 bg-white shadow-lg dark:border-white/10 dark:bg-slate-950"
                 >
                     <ul className="mx-auto max-w-6xl px-6 py-3">
                         {links.map((link) => (

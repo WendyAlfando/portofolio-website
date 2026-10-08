@@ -46,7 +46,10 @@ export default function Education({ lang, dict }: { lang: Locale; dict: Dictiona
                         </dl>
                     </article>
 
-                    <div className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+                    <div
+                        style={{ "--i": 1 } as React.CSSProperties}
+                        className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]"
+                    >
                         <h3 className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white">
                             <Award className="size-5 text-amber-500" aria-hidden />
                             {education.certificationsTitle}

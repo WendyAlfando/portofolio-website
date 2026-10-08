@@ -11,10 +11,14 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
     return (
-        <html lang="id" className={`dark ${fontVariables}`}>
-            <body className="grid min-h-dvh place-items-center bg-slate-950 px-6 font-sans text-slate-300 antialiased">
-                <main className="text-center">
-                    <p className="text-gradient font-display text-8xl font-bold">404</p>
+        <html lang="id" className={`dark ${fontVariables}`} data-splash="seen">
+            <body className="grid min-h-dvh place-items-center overflow-hidden bg-slate-950 px-6 font-sans text-slate-300 antialiased">
+                <div aria-hidden className="pointer-events-none fixed inset-0">
+                    <div className="drift-a absolute top-1/4 left-1/4 size-72 rounded-full bg-[radial-gradient(closest-side,rgb(59_130_246/0.16),transparent)]" />
+                    <div className="drift-b absolute right-1/4 bottom-1/4 size-80 rounded-full bg-[radial-gradient(closest-side,rgb(251_191_36/0.12),transparent)]" />
+                </div>
+                <main className="relative text-center">
+                    <p className="enter-scale text-gradient font-display text-8xl font-bold">404</p>
                     <h1 className="mt-6 font-display text-3xl font-bold text-white">Halaman tidak ditemukan</h1>
                     <p lang="en" className="mt-2 text-slate-400">
                         Page not found

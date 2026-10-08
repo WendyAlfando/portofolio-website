@@ -9,8 +9,13 @@ export default async function NotFound() {
     const dict = getDictionary(lang)
 
     return (
-        <div className="mx-auto flex min-h-[65vh] max-w-xl flex-col items-center justify-center px-6 py-24 text-center">
-            <p className="text-gradient font-display text-8xl font-bold">404</p>
+        <div className="relative isolate mx-auto flex min-h-[65vh] max-w-xl flex-col items-center justify-center px-6 py-24 text-center">
+            {/* Floating background shapes */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+                <div className="drift-a absolute top-1/4 left-0 size-64 rounded-full bg-[radial-gradient(closest-side,rgb(59_130_246/0.16),transparent)]" />
+                <div className="drift-b absolute right-0 bottom-1/4 size-72 rounded-full bg-[radial-gradient(closest-side,rgb(251_191_36/0.14),transparent)]" />
+            </div>
+            <p className="enter-scale text-gradient font-display text-8xl font-bold">404</p>
             <h1 className="mt-6 font-display text-3xl font-bold text-slate-900 dark:text-white">{dict.notFound.title}</h1>
             <p className="mt-3 text-slate-600 dark:text-slate-400">{dict.notFound.description}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">

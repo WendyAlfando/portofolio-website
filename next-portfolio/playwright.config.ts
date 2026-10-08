@@ -14,6 +14,8 @@ export default defineConfig({
     use: {
         baseURL,
         trace: "retain-on-failure",
+        // Animations are switched off unless a test opts in, which keeps parallel runs fast and stable
+        reducedMotion: "reduce",
     },
     projects: [
         { name: "desktop", use: { channel, viewport: { width: 1440, height: 900 } } },

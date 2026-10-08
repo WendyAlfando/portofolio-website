@@ -25,6 +25,7 @@ export const id: Dictionary = {
     },
     hero: {
         kicker: "Business Analyst · RPA & Quality Assurance",
+        typing: ["Business Analyst", "RPA Specialist", "QA Tester", "Problem Solver"],
         headline: {
             before: "Mengubah proses manual yang berulang menjadi ",
             highlight: "alur kerja otomatis",
@@ -167,37 +168,53 @@ export const id: Dictionary = {
     },
     skills: {
         eyebrow: "Keahlian",
-        title: "Metode dan tools yang saya pakai",
-        subtitle: "Semuanya dipakai langsung di proyek-proyek di atas.",
+        title: "Keahlian & kompetensi",
+        subtitle: "Tools dan kemampuan yang saya pakai sehari-hari, berdasarkan penilaian pribadi.",
         groups: [
             {
-                title: "Analisis bisnis",
-                items: [
-                    "Requirements gathering",
-                    "Wawancara stakeholder",
-                    "Business process mapping",
-                    "Gap analysis",
-                    "Cost-benefit analysis",
-                    "Business Requirement Document (BRD)",
-                    "Flowchart",
+                title: "Analisis proses",
+                skills: [
+                    { name: "Requirements Gathering", level: 92 },
+                    { name: "Business Process Mapping", level: 88 },
+                    { name: "Process Optimization", level: 87 },
+                    { name: "Gap Analysis", level: 85 },
+                    { name: "Quality Assurance & Testing", level: 85 },
                 ],
             },
             {
-                title: "Quality assurance",
-                items: [
-                    "Functional testing",
-                    "Integration testing",
-                    "User acceptance testing (UAT)",
-                    "Validasi API",
-                    "Performance testing",
-                    "Security testing",
-                    "Evaluasi UI/UX",
+                title: "Analisis data",
+                skills: [
+                    { name: "Excel Advanced", level: 95 },
+                    { name: "Power BI", level: 90 },
+                    { name: "SQL", level: 85 },
+                    { name: "RPA Tools", level: 80 },
+                    { name: "Python", level: 75 },
                 ],
             },
             {
-                title: "Data & otomasi",
-                items: ["RPA", "SQL", "Python", "Excel (advanced)", "Power BI"],
+                title: "Soft skills",
+                skills: [
+                    { name: "Problem solving", level: 95 },
+                    { name: "Kerja sama tim", level: 92 },
+                    { name: "Kepemimpinan", level: 90 },
+                    { name: "Komunikasi", level: 88 },
+                    { name: "Manajemen waktu", level: 85 },
+                ],
             },
+        ],
+        toolsTitle: "Metode & jenis testing di proyek",
+        tools: [
+            "Wawancara stakeholder",
+            "Cost-benefit analysis",
+            "Business Requirement Document (BRD)",
+            "Flowchart",
+            "Functional testing",
+            "Integration testing",
+            "User acceptance testing (UAT)",
+            "Validasi API",
+            "Performance testing",
+            "Security testing",
+            "Evaluasi UI/UX",
         ],
     },
     education: {
@@ -286,5 +303,14 @@ export const id: Dictionary = {
         description: "Halaman yang Anda cari tidak ada atau sudah dipindahkan.",
         home: "Kembali ke beranda",
         blog: "Lihat blog",
+    },
+    floating: {
+        whatsapp: "Chat via WhatsApp",
+        tooltip: "Ada pertanyaan? Chat via WhatsApp! 👋",
+        closeTooltip: "Tutup",
+        backToTop: "Kembali ke atas",
+    },
+    splash: {
+        label: "Portofolio",
     },
 }

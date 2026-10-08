@@ -23,6 +23,11 @@ export default function Experience({ lang, dict }: { lang: Locale; dict: Diction
 
                 <div className="relative">
                     <span aria-hidden className="absolute top-2 bottom-2 left-[5px] w-px bg-slate-300 dark:bg-white/15" />
+                    {/* Brand-coloured line that draws itself down the timeline while scrolling */}
+                    <span
+                        aria-hidden
+                        className="draw-y absolute top-2 bottom-2 left-[5px] w-px bg-linear-to-b from-blue-500 via-blue-400 to-amber-400"
+                    />
                     <ol className="space-y-12">
                         {experience.items.map((item) => (
                             <li key={`${item.role}-${item.start}`} className="reveal relative pl-8">

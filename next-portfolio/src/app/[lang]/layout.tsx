@@ -5,7 +5,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "../globals.css"
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
+import SplashScreen from "@/components/layout/SplashScreen"
 import ThemeProvider from "@/components/layout/ThemeProvider"
+import CustomCursor from "@/components/ui/CustomCursor"
+import FloatingActions from "@/components/ui/FloatingActions"
 import { getDictionary } from "@/content"
 import { profile } from "@/content/profile"
 import { fontVariables } from "@/lib/fonts"
@@ -55,6 +58,7 @@ export default async function LangLayout({
     return (
         <html lang={lang} className={fontVariables} suppressHydrationWarning>
             <body className="min-h-dvh bg-white font-sans text-slate-700 antialiased dark:bg-slate-950 dark:text-slate-300">
+                <SplashScreen label={dict.splash.label} />
                 <ThemeProvider>
                     <a
                         href="#main"
@@ -65,6 +69,11 @@ export default async function LangLayout({
                     <Header lang={lang} dict={dict} />
                     <main id="main">{children}</main>
                     <Footer lang={lang} dict={dict} />
+                    <FloatingActions
+                        whatsappHref={`${profile.whatsapp}?text=${encodeURIComponent(dict.contact.whatsappGreeting)}`}
+                        labels={dict.floating}
+                    />
+                    <CustomCursor />
                 </ThemeProvider>
                 <Analytics />
                 <SpeedInsights />

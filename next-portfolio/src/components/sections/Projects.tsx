@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowUpRight, Sparkles } from "lucide-react"
+import CountUp from "@/components/ui/CountUp"
 import SectionHeading from "@/components/ui/SectionHeading"
+import TiltCard from "@/components/ui/TiltCard"
 import type { Dictionary } from "@/content/types"
 import { getAllPosts } from "@/lib/blog"
 import { localePath } from "@/lib/i18n"
@@ -75,7 +77,7 @@ export default function Projects({ dict }: { dict: Dictionary }) {
                                 >
                                     <dt className="text-sm leading-snug text-slate-600 dark:text-slate-400">{metric.label}</dt>
                                     <dd className="order-first min-w-16 font-display text-3xl font-bold text-blue-600 sm:text-4xl dark:text-blue-400">
-                                        {metric.value}
+                                        <CountUp value={metric.value} />
                                     </dd>
                                 </div>
                             ))}
@@ -98,36 +100,35 @@ export default function Projects({ dict }: { dict: Dictionary }) {
                 </article>
 
                 <ul className="mt-6 grid gap-6 md:grid-cols-2">
-                    {projects.items.map((item) => (
-                        <li
-                            key={item.title}
-                            className="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-white/[0.03]"
-                        >
-                            <div className="flex items-start justify-between gap-4">
-                                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-white/10 dark:text-slate-300">
-                                    {item.category}
-                                </span>
-                                {item.metric && (
-                                    <p className="text-right">
-                                        <span className="block font-display text-3xl leading-none font-bold text-blue-600 dark:text-blue-400">
-                                            {item.metric.value}
-                                        </span>
-                                        <span className="mt-1 block text-xs text-slate-600 dark:text-slate-400">{item.metric.label}</span>
-                                    </p>
-                                )}
-                            </div>
-                            <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
-                            <p className="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">{item.summary}</p>
-                            <dl className="mt-5 space-y-3 border-t border-slate-200 pt-5 text-sm dark:border-white/10">
-                                <div>
-                                    <dt className="font-semibold text-slate-900 dark:text-white">{labels.approach}</dt>
-                                    <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.approach}</dd>
+                    {projects.items.map((item, index) => (
+                        <li key={item.title} style={{ "--i": index % 2 } as React.CSSProperties} className="reveal">
+                            <TiltCard className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 hover:border-blue-500/40 hover:shadow-xl hover:shadow-slate-900/5 md:p-8 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-blue-400/30 dark:hover:shadow-black/30">
+                                <div className="flex items-start justify-between gap-4">
+                                    <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-white/10 dark:text-slate-300">
+                                        {item.category}
+                                    </span>
+                                    {item.metric && (
+                                        <p className="text-right">
+                                            <span className="block font-display text-3xl leading-none font-bold text-blue-600 dark:text-blue-400">
+                                                <CountUp value={item.metric.value} />
+                                            </span>
+                                            <span className="mt-1 block text-xs text-slate-600 dark:text-slate-400">{item.metric.label}</span>
+                                        </p>
+                                    )}
                                 </div>
-                                <div>
-                                    <dt className="font-semibold text-slate-900 dark:text-white">{labels.result}</dt>
-                                    <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.result}</dd>
-                                </div>
-                            </dl>
+                                <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                                <p className="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">{item.summary}</p>
+                                <dl className="mt-5 space-y-3 border-t border-slate-200 pt-5 text-sm dark:border-white/10">
+                                    <div>
+                                        <dt className="font-semibold text-slate-900 dark:text-white">{labels.approach}</dt>
+                                        <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.approach}</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-slate-900 dark:text-white">{labels.result}</dt>
+                                        <dd className="mt-0.5 leading-relaxed text-slate-600 dark:text-slate-400">{item.result}</dd>
+                                    </div>
+                                </dl>
+                            </TiltCard>
                         </li>
                     ))}
                 </ul>

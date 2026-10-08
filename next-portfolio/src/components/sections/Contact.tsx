@@ -37,7 +37,7 @@ export default function Contact({ dict }: { dict: Dictionary }) {
                             {channels.map(({ icon: Icon, label, value, href, external }) => {
                                 const content = (
                                     <>
-                                        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-blue-500/10 text-blue-600 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white dark:text-blue-400 dark:group-hover:text-white">
                                             <Icon className="size-5" aria-hidden />
                                         </span>
                                         <span className="min-w-0">
@@ -54,7 +54,7 @@ export default function Contact({ dict }: { dict: Dictionary }) {
                                             <a
                                                 href={href}
                                                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                                                className="-mx-2 flex items-center gap-4 rounded-xl p-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5"
+                                                className="group -mx-2 flex items-center gap-4 rounded-xl p-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5"
                                             >
                                                 {content}
                                             </a>

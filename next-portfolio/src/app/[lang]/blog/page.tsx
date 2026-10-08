@@ -43,7 +43,7 @@ export default async function BlogIndexPage({ params }: Props) {
             ) : (
                 <ul className="mt-12 divide-y divide-slate-200 border-y border-slate-200 dark:divide-white/10 dark:border-white/10">
                     {posts.map((post) => (
-                        <li key={`${post.lang}-${post.slug}`}>
+                        <li key={`${post.lang}-${post.slug}`} className="reveal">
                             <article lang={post.lang} className="group relative py-8">
                                 <p className="text-sm text-slate-600 dark:text-slate-400">
                                     <time dateTime={post.date}>{formatDate(post.date, lang)}</time> · {post.readingMinutes}{" "}

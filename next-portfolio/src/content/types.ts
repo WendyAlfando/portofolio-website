@@ -86,6 +86,8 @@ export interface Dictionary {
     }
     hero: {
         kicker: string
+        /** Roles cycled by the typing effect */
+        typing: string[]
         headline: { before: string; highlight: string; after: string }
         summary: string
         ctaPrimary: string
@@ -122,7 +124,10 @@ export interface Dictionary {
         eyebrow: string
         title: string
         subtitle: string
-        groups: { title: string; items: string[] }[]
+        /** level is a self-assessed percentage (0–100) */
+        groups: { title: string; skills: { name: string; level: number }[] }[]
+        toolsTitle: string
+        tools: string[]
     }
     education: {
         eyebrow: string
@@ -180,5 +185,14 @@ export interface Dictionary {
         description: string
         home: string
         blog: string
+    }
+    floating: {
+        whatsapp: string
+        tooltip: string
+        closeTooltip: string
+        backToTop: string
+    }
+    splash: {
+        label: string
     }
 }

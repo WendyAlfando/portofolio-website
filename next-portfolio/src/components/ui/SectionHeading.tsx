@@ -15,7 +15,7 @@ export default function SectionHeading({ index, eyebrow, title, titleId, subtitl
                 <span aria-hidden className="font-display text-base tracking-normal text-amber-600 dark:text-amber-300">
                     {String(index).padStart(2, "0")}
                 </span>
-                <span aria-hidden className="h-px w-8 bg-current opacity-40" />
+                <span aria-hidden className="draw-x h-px w-8 bg-current opacity-40" />
                 {eyebrow}
             </p>
             <h2 id={titleId} className="mt-4 font-display text-3xl font-bold tracking-tight text-balance text-slate-900 md:text-4xl dark:text-white">

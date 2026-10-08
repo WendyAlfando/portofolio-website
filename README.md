@@ -12,7 +12,8 @@ Personal portfolio of **Wendy Alfando**, Business Analyst (RPA & Quality Assuran
 - Fully static: every page and social sharing image is generated at build time
 - Case-study layout for projects, plus a Markdown blog
 - SEO: canonical URLs, sitemap, robots.txt, JSON-LD (`Person`, `BlogPosting`) and generated Open Graph images
-- Accessible: skip link, labelled controls, visible focus, respects `prefers-reduced-motion`
+- Motion: splash screen, staggered hero load-in, particle background, typing effect, scroll-linked progress and reveals, count-up metrics, filling skill bars, 3D tilt cards, custom cursor and a circular theme switch; all of it turns off with `prefers-reduced-motion`
+- Accessible: skip link, labelled controls, visible focus, content never hidden behind JavaScript
 - Dark and light themes
 - End-to-end tests with Playwright on desktop and mobile viewports
 

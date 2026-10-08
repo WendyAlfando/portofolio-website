@@ -41,7 +41,10 @@ export default function Organization({ lang, dict }: { lang: Locale; dict: Dicti
                         </ul>
                     </div>
 
-                    <div className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-slate-950">
+                    <div
+                        style={{ "--i": 1 } as React.CSSProperties}
+                        className="reveal rounded-2xl border border-slate-200 bg-white p-6 md:p-8 dark:border-white/10 dark:bg-slate-950"
+                    >
                         <h3 className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white">
                             <Flag className="size-5 text-amber-500" aria-hidden />
                             {organization.committeeTitle}

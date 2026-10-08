@@ -25,6 +25,7 @@ export const en: Dictionary = {
     },
     hero: {
         kicker: "Business Analyst · RPA & Quality Assurance",
+        typing: ["Business Analyst", "RPA Specialist", "QA Tester", "Problem Solver"],
         headline: {
             before: "Turning manual, repetitive processes into ",
             highlight: "automated workflows",
@@ -166,37 +167,53 @@ export const en: Dictionary = {
     },
     skills: {
         eyebrow: "Skills",
-        title: "Methods and tools I use",
-        subtitle: "All of them put to work in the projects above.",
+        title: "Skills & competencies",
+        subtitle: "The tools and abilities I use day to day, self-assessed.",
         groups: [
             {
-                title: "Business analysis",
-                items: [
-                    "Requirements gathering",
-                    "Stakeholder interviews",
-                    "Business process mapping",
-                    "Gap analysis",
-                    "Cost-benefit analysis",
-                    "Business Requirement Documents (BRD)",
-                    "Flowcharts",
+                title: "Process analysis",
+                skills: [
+                    { name: "Requirements Gathering", level: 92 },
+                    { name: "Business Process Mapping", level: 88 },
+                    { name: "Process Optimization", level: 87 },
+                    { name: "Gap Analysis", level: 85 },
+                    { name: "Quality Assurance & Testing", level: 85 },
                 ],
             },
             {
-                title: "Quality assurance",
-                items: [
-                    "Functional testing",
-                    "Integration testing",
-                    "User acceptance testing (UAT)",
-                    "API validation",
-                    "Performance testing",
-                    "Security testing",
-                    "UI/UX evaluation",
+                title: "Data analysis",
+                skills: [
+                    { name: "Excel Advanced", level: 95 },
+                    { name: "Power BI", level: 90 },
+                    { name: "SQL", level: 85 },
+                    { name: "RPA Tools", level: 80 },
+                    { name: "Python", level: 75 },
                 ],
             },
             {
-                title: "Data & automation",
-                items: ["RPA", "SQL", "Python", "Excel (advanced)", "Power BI"],
+                title: "Soft skills",
+                skills: [
+                    { name: "Problem solving", level: 95 },
+                    { name: "Teamwork", level: 92 },
+                    { name: "Leadership", level: 90 },
+                    { name: "Communication", level: 88 },
+                    { name: "Time management", level: 85 },
+                ],
             },
+        ],
+        toolsTitle: "Methods & testing used in projects",
+        tools: [
+            "Stakeholder interviews",
+            "Cost-benefit analysis",
+            "Business Requirement Documents (BRD)",
+            "Flowcharts",
+            "Functional testing",
+            "Integration testing",
+            "User acceptance testing (UAT)",
+            "API validation",
+            "Performance testing",
+            "Security testing",
+            "UI/UX evaluation",
         ],
     },
     education: {
@@ -286,5 +303,14 @@ export const en: Dictionary = {
         description: "The page you're looking for doesn't exist or has moved.",
         home: "Back to home",
         blog: "Visit the blog",
+    },
+    floating: {
+        whatsapp: "Chat on WhatsApp",
+        tooltip: "Got a question? Chat on WhatsApp! 👋",
+        closeTooltip: "Close",
+        backToTop: "Back to top",
+    },
+    splash: {
+        label: "Portfolio",
     },
 }

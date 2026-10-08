@@ -23,17 +23,18 @@ export default function About({ dict }: { dict: Dictionary }) {
                     </div>
                 </div>
 
-                <div className="reveal">
-                    <h3 className="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase dark:text-slate-400">
+                <div>
+                    <h3 className="reveal text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase dark:text-slate-400">
                         {about.focusTitle}
                     </h3>
                     <ul className="mt-5 space-y-4">
-                        {about.focus.map((item) => {
+                        {about.focus.map((item, index) => {
                             const Icon = focusIcons[item.icon]
                             return (
                                 <li
                                     key={item.title}
-                                    className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-white/10 dark:bg-white/[0.03]"
+                                    style={{ "--i": index } as React.CSSProperties}
+                                    className="reveal flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 transition duration-300 hover:-translate-y-0.5 hover:border-blue-500/40 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-blue-400/30"
                                 >
                                     <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
                                         <Icon className="size-5" aria-hidden />

@@ -136,6 +136,109 @@ test.describe("blog", () => {
     })
 })
 
+test.describe("motion", () => {
+    const featuredMetric = "#projects article dl.grid dd"
+
+    test("metrics show their final value when motion is reduced", async ({ page }) => {
+        await page.goto("/id")
+        await expect(page.locator(featuredMetric).first()).toHaveText("5+")
+    })
+
+    test.describe("with animations on", () => {
+        test.use({ reducedMotion: "no-preference" })
+
+        test("metrics count up to their real value once scrolled into view", async ({ page }) => {
+            await page.goto("/id")
+            const metric = page.locator(featuredMetric).first()
+            // Below the fold it waits at zero, then counts up when it comes into view
+            await expect(metric).toHaveText("0+")
+            await metric.scrollIntoViewIfNeeded()
+            await expect(metric).toHaveText("5+")
+        })
+
+        test("theme toggle still switches the theme while animating", async ({ page }) => {
+            await page.goto("/id")
+            await expect(page.locator("html")).toHaveClass(/dark/)
+            await page.getByRole("button", { name: "Ganti tema terang/gelap" }).click()
+            await expect(page.locator("html")).not.toHaveClass(/dark/)
+            await page.reload()
+            await expect(page.locator("html")).not.toHaveClass(/dark/)
+        })
+
+        test("splash screen plays once per session", async ({ page }) => {
+            await page.goto("/id")
+            const splash = page.locator(".splash")
+            await expect(splash).toHaveCSS("display", "grid")
+            await expect(splash).toBeHidden({ timeout: 5000 })
+            await page.reload()
+            await expect(page.locator("html")).toHaveAttribute("data-splash", "seen")
+            await expect(splash).toHaveCSS("display", "none")
+        })
+
+        test("typing effect cycles through the roles", async ({ page }) => {
+            await page.goto("/id")
+            const typed = page.locator("#hero-title").locator("xpath=preceding-sibling::p[1]").locator("span[aria-hidden]").first()
+            await expect(typed).toHaveText("Business Analyst")
+            await expect(typed).not.toHaveText("Business Analyst", { timeout: 8000 })
+        })
+
+        test("skill bars fill up once scrolled into view", async ({ page }) => {
+            await page.goto("/id")
+            const card = page.locator("#skills [data-armed]").first()
+            const bar = card.locator(".skill-fill").first()
+            expect(await bar.evaluate((el) => el.getBoundingClientRect().width)).toBe(0)
+            await card.scrollIntoViewIfNeeded()
+            await expect(card).toHaveAttribute("data-in-view", "true")
+            await expect
+                .poll(() => bar.evaluate((el) => el.getBoundingClientRect().width / el.parentElement!.getBoundingClientRect().width))
+                .toBeGreaterThan(0.85)
+        })
+
+        test("case study cards tilt toward the mouse", async ({ page, isMobile }) => {
+            test.skip(isMobile, "tilt is mouse-only")
+            await page.goto("/id")
+            const card = page.locator("#projects .tilt-card").first()
+            await card.scrollIntoViewIfNeeded()
+            const box = (await card.boundingBox())!
+            await page.mouse.move(box.x + box.width * 0.9, box.y + box.height * 0.2)
+            await expect(card).toHaveAttribute("data-tilting", "true")
+            // Pointer near the top-right corner: tilts back (positive X) and to the right (positive Y)
+            const angle = (name: string) => card.evaluate((el, prop) => parseFloat(el.style.getPropertyValue(prop)), name)
+            await expect.poll(() => angle("--rx")).toBeGreaterThan(1)
+            await expect.poll(() => angle("--ry")).toBeGreaterThan(1)
+        })
+
+        test("custom cursor follows the mouse on desktop", async ({ page, isMobile }) => {
+            test.skip(isMobile, "the cursor dot is for a mouse only")
+            await page.goto("/id")
+            await page.mouse.move(400, 300)
+            await page.mouse.move(420, 320)
+            await expect(page.locator('div[data-visible="true"].fixed')).toHaveCount(1)
+        })
+    })
+})
+
+test.describe("floating actions", () => {
+    test("WhatsApp button pops in and back-to-top returns to the top", async ({ page }) => {
+        await page.goto("/id")
+        const whatsapp = page.getByRole("link", { name: "Chat via WhatsApp" })
+        await expect(whatsapp).toBeVisible({ timeout: 6000 })
+        const backToTop = page.getByRole("button", { name: "Kembali ke atas" })
+        await expect(backToTop).toBeHidden()
+        await page.locator("#skills").scrollIntoViewIfNeeded()
+        await expect(backToTop).toBeVisible()
+        await backToTop.click()
+        await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(50)
+    })
+
+    test("skill bars are full when motion is reduced", async ({ page }) => {
+        await page.goto("/id")
+        const bar = page.locator("#skills .skill-fill").first()
+        const ratio = await bar.evaluate((el) => el.getBoundingClientRect().width / el.parentElement!.getBoundingClientRect().width)
+        expect(ratio).toBeGreaterThan(0.85)
+    })
+})
+
 test.describe("contact form", () => {
     test("shows a confirmation after sending", async ({ page }) => {
         // Never hit the real Formspree endpoint from tests
